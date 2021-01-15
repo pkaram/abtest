@@ -1,5 +1,5 @@
 Package: abtest
-Title: What the Package Does (One Line, Title Case)
+Title: AB testing
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "First",

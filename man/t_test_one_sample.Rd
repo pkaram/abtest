@@ -4,7 +4,7 @@
 \alias{t_test_one_sample}
 \title{One Sample t-test}
 \usage{
-t_test_one_sample(x, m0, clt = F)
+t_test_one_sample(x, m0, clt = F, ...)
 }
 \arguments{
 \item{x}{sample}

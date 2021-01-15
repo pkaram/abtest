@@ -6,9 +6,14 @@
 #'@param m0 value to be tested against
 #'@param clt applies or not clt_transform function
 #'@return p-value of test along with a histogram
-t_test_one_sample <- function(x,m0,clt=F) {
+t_test_one_sample <- function(x,m0,clt=F,...) {
   if (clt==T) {
-    x <- clt_transform(x)
+    kwargs <- list(...)
+    if (is.null(kwargs$outcome)) {
+      x <- clt_transform(x)
+    } else {
+      x <- clt_transform(x,outcome = kwargs$outcome,n=kwargs$n)
+    }
   }
   m <- mean(x)
   sd <- sqrt(sum((m-x)**2)/length(x))
@@ -33,10 +38,16 @@ t_test_one_sample <- function(x,m0,clt=F) {
 #'@param x1,x2 samples to be compared
 #'@param clt applies or not clt_transform function
 #'@return p-value of test along with a histogram
-t_test_two_sample <- function(x1,x2,clt=F) {
+t_test_two_sample <- function(x1,x2,clt=F,...) {
   if (clt==T) {
-    x1 <- clt_transform(x1)
-    x2 <- clt_transform(x2)
+    kwargs <- list(...)
+    if (is.null(kwargs$outcome)) {
+      x1 <- clt_transform(x1)
+      x2 <- clt_transform(x2)
+    } else {
+      x1 <- clt_transform(x1,outcome = kwargs$outcome,n=kwargs$n)
+      x2 <- clt_transform(x2,outcome = kwargs$outcome,n=kwargs$n)
+    }
   }
   m1 <- mean(x1)
   m2 <- mean(x2)
@@ -67,11 +78,43 @@ t_test_two_sample <- function(x1,x2,clt=F) {
 #'According to CLT we sample multiple times to produce a vector of sample means
 #'
 #'@param x data to be transformed
-#'@return transformed vector
-clt_transform <- function(x1) {
-  for (i in 1:2000) {
-    x2[i] <- mean(sample(x1,round(0.3*length(x1)),replace = F))
+#'@param outcome 'continuous'/'dichotomous' depending on the related outcome
+#'@return vector of means based on sampling according to CLT
+clt_transform <- function(x,outcome='continuous',...) {
+  kwargs=list(...)
+  if (outcome=='continuous') {
+      #condition to use CLT
+      if (length(x)>=31) {
+        z <- NULL
+        set.seed(3)
+        for (i in 1:2000) {
+          #according to CLT samples should be sufficiently large, n>=30, with replacement
+          z[i] <- mean(sample(x,30,replace = T))
+        }
+        return(z)
+      } else {
+        stop('sample size n < 31')
+      }
+  } else if (outcome=='dichotomous') {
+    n=kwargs$n
+    #success for any given trial
+    p=sum(x)/length(x)
+    #condition to use CLT
+    if (min(c(n*p,n*(1-p)))>5) {
+      z <- NULL
+      set.seed(3)
+      for (i in 1:2000) {
+        #according to CLT samples should be sufficiently large, n>=30, with replacement
+        s <- sample(x,n,replace = T)
+        z[i] <- sum(s)/length(s)
+      }
+      return(z)
+    } else {
+      stop('min(np,n(1-p)) <= 5 for n selected')
+    }
   }
-  x2
+
 }
+
+
 

@@ -4,13 +4,15 @@
 \alias{clt_transform}
 \title{Central Limit Theorem transformation}
 \usage{
-clt_transform(x1)
+clt_transform(x, outcome = "continuous", ...)
 }
 \arguments{
 \item{x}{data to be transformed}
+
+\item{outcome}{'continuous'/'dichotomous' depending on the related outcome}
 }
 \value{
-transformed vector
+vector of means based on sampling according to CLT
 }
 \description{
 According to CLT we sample multiple times to produce a vector of sample means

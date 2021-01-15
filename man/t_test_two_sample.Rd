@@ -4,7 +4,7 @@
 \alias{t_test_two_sample}
 \title{Two Sample t-test}
 \usage{
-t_test_two_sample(x1, x2, clt = F)
+t_test_two_sample(x1, x2, clt = F, ...)
 }
 \arguments{
 \item{x1, x2}{samples to be compared}
