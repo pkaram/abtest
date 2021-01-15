@@ -4,7 +4,7 @@ server <- function(input, output) {
   testresults <- shiny::reactive({
     set.seed(3)
     x1 <- rnorm(1000)
-    z1 <- t_test_one_sample(x,input$m0)
+    z1 <- t_test_one_sample(x1,input$m0)
   })
 
   #plot output
