@@ -16,5 +16,6 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Import:
   ggplot2 (>= 3.3.3),
-  hrbrthemes (>= 0.8.0)
+  hrbrthemes (>= 0.8.0),
+  shiny (>=1.5.0)
   

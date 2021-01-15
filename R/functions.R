@@ -19,14 +19,16 @@ t_test_one_sample <- function(x,m0,clt=F,...) {
   sd <- sqrt(sum((m-x)**2)/length(x))
   t <- (m-m0)/(sd/sqrt(length(x)))
   p_value <- round(2*pt(-abs(t),df=length(x)-1,lower.tail=TRUE),3)
-  print(paste0("p-value:",p_value," , H_0: sample's true mean is ",m0))
+  l <- list()
+  l$result <- paste0("p-value:",p_value," , H_0: sample's true mean is ",m0)
   #create histogram
   p <- ggplot2::ggplot() +
     ggplot2::geom_histogram(ggplot2::aes(x)) +
     ggplot2::geom_vline(xintercept = m0) +
     ggplot2::ggtitle(label = paste0('Histogram of Sample vs H_0 mean (vline):',as.character(m0))) +
     ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
-  suppressMessages(print(p))
+  l$plot <- p
+  return(l)
 }
 
 
