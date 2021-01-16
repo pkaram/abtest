@@ -37,13 +37,20 @@ ui <- shiny::fluidPage(
                             value = 0.2)
       ),
 
+      shiny::radioButtons(inputId = "clt_par",label = "Apply CLT:",
+                          selected = FALSE,
+                          choices = c(TRUE,FALSE)),
+
       shiny::radioButtons(inputId = "variable_outcome",label = "Select Variable Outcome:",
                           selected = "continuous",
                           choices = c("continuous","dichotomous")),
 
-      shiny::radioButtons(inputId = "clt_par",label = "Apply CLT:",
-                          selected = FALSE,
-                          choices = c(TRUE,FALSE))
+      shiny::conditionalPanel(
+        condition = "variable_outcome=='dichotomous'",
+        shiny::sliderInput(inputId = "n_size",label = "S",
+                            min = 1,max = 1000,value = 20)
+      )
+
 
     ),
     # Main panel for displaying outputs
