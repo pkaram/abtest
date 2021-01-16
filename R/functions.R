@@ -59,7 +59,8 @@ t_test_two_sample <- function(x1,x2,clt=F,...) {
   sd_pooled <- (((length(x1)-1)*(sd1**2)) + ((length(x2)-1)*(sd2**2)))/ (length(x1)+length(x2)-2)
   t <- m_diff/(sqrt(sd_pooled)*sqrt(1/length(x1)+1/length(x2)))
   p_value <- round(2*pt(-abs(t),df=length(x1)+length(x2)-2,lower.tail=TRUE),3)
-  print(paste0("p-value:",p_value," , H_0: samples' mean equal"))
+  l <- list()
+  l$result <- paste0("p-value:",p_value," , H_0: samples' mean equal")
   #create histogram
   p <- ggplot2::ggplot( data = rbind(data.frame(
     group=c(rep("x1",length(x1)),rep("x2",length(x2))),
@@ -70,7 +71,8 @@ t_test_two_sample <- function(x1,x2,clt=F,...) {
     ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
   hrbrthemes::theme_ipsum() +
     ggplot2::labs(fill="")
-  suppressMessages(print(p))
+  l$plot <- p
+  return(l)
 }
 
 
