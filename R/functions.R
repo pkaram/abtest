@@ -6,6 +6,7 @@
 #'@param m0 value to be tested against
 #'@param clt applies or not clt_transform function
 #'@return p-value of test along with a histogram
+#'@export
 t_test_one_sample <- function(x,m0,clt=F,...) {
   if (clt==T) {
     kwargs <- list(...)
@@ -40,6 +41,7 @@ t_test_one_sample <- function(x,m0,clt=F,...) {
 #'@param x1,x2 samples to be compared
 #'@param clt applies or not clt_transform function
 #'@return p-value of test along with a histogram
+#'@export
 t_test_two_sample <- function(x1,x2,clt=F,...) {
   if (clt==T) {
     kwargs <- list(...)
@@ -84,6 +86,7 @@ t_test_two_sample <- function(x1,x2,clt=F,...) {
 #'@param x data to be transformed
 #'@param outcome 'continuous'/'dichotomous' depending on the related outcome
 #'@return vector of means based on sampling according to CLT
+#'@export
 clt_transform <- function(x,outcome='continuous',...) {
   kwargs=list(...)
   if (outcome=='continuous') {
