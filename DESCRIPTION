@@ -5,11 +5,9 @@ Authors@R:
     person(given = "Panagiotis",
            family = "Karameros",
            role = c("aut", "cre"),
-           email = "karamerosp@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+           email = "karamerosp@gmail.com")
 Description: Package provides functions for AB testing along with a shiny app to be used as a tool.
-License: `use_mit_license()`, `use_gpl3_license()` or friends to
-    pick a license
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
@@ -18,4 +16,3 @@ Import:
   ggplot2 (>= 3.3.3),
   hrbrthemes (>= 0.8.0),
   shiny (>=1.5.0)
-  
